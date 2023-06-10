@@ -2,9 +2,9 @@
 
 Litecase shop application with flutter.
 
-### Folder Structure
+## Folder Structure
 
-```shell
+```text
 .
 |-- LICENSE
 |-- README.md
