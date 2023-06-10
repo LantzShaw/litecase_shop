@@ -1,16 +1,92 @@
-# litecase_shop
+# Litecase Shop App
 
-A new Flutter project.
+Litecase shop application with flutter.
 
-## Getting Started
+### Folder Structure
 
-This project is a starting point for a Flutter application.
+```shell
+.
+|-- LICENSE
+|-- README.md
+|-- analysis_options.yaml
+|-- android
+|-- ios
+|-- lib
+|   |-- main.dart
+|   |-- src
+|       |-- app.dart
+|       |-- constants
+|       |   |-- app_colors.dart
+|       |   |-- app_images.dart
+|       |   |-- app_sizes.dart
+|       |   `-- app_texts.dart
+|       |-- features
+|       |   |-- address
+|       |   |   |-- bindings
+|       |   |   |-- controllers
+|       |   |   |-- models
+|       |   |   |-- screens
+|       |   |   |-- services
+|       |   |   `-- widges
+|       |   |-- authentication
+|       |   |   |-- bindings
+|       |   |   |-- controllers
+|       |   |   |-- models
+|       |   |   |-- screens
+|       |   |   |   |-- profile
+|       |   |   |   |   `-- profile_screen.dart
+|       |   |   |   |-- sign_in
+|       |   |   |   |   `-- sign_in_screen.dart
+|       |   |   |   `-- sign_up
+|       |   |   |       `-- sign_up_screen.dart
+|       |   |   |-- services
+|       |   |   `-- widges
+|       |   |-- cart
+|       |   |   |-- bindings
+|       |   |   |-- controllers
+|       |   |   |-- models
+|       |   |   |-- screens
+|       |   |   |-- services
+|       |   |   `-- widges
+|       |   |-- checkout
+|       |   |   |-- bindings
+|       |   |   |-- controllers
+|       |   |   |-- models
+|       |   |   |-- screens
+|       |   |   |-- services
+|       |   |   `-- widges
+|       |   |-- orders
+|       |   |   |-- bindings
+|       |   |   |-- controllers
+|       |   |   |-- models
+|       |   |   |-- screens
+|       |   |   |-- services
+|       |   |   `-- widges
+|       |   `-- products
+|       |       |-- bindings
+|       |       |-- controllers
+|       |       |-- models
+|       |       |-- screens
+|       |       |-- services
+|       |       `-- widges
+|       |-- localization
+|       |-- network
+|       |-- routes
+|       |   |-- app_pages.dart
+|       |   `-- app_routes.dart
+|       |-- themes
+|       |   |-- app_dark_theme.dart
+|       |   `-- app_light_theme.dart
+|       |-- utils
+|       |-- widgets
+|-- linux
+|-- litecase_shop.iml
+|-- macos
+|-- pubspec.lock
+|-- pubspec.yaml
+|-- test
+|   `-- widget_test.dart
+|-- web
+|-- windows
+```
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
