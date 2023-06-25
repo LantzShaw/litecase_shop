@@ -11,6 +11,14 @@ Litecase shop application with flutter.
 |-- analysis_options.yaml
 |-- android
 |-- ios
+|-- assets
+|   |-- fonts
+|   |-- images
+|   |-- icons
+|   |-- svgs
+|   |-- videos
+|   |-- audios
+|   |-- logo
 |-- lib
 |   |-- main.dart
 |   |-- src
