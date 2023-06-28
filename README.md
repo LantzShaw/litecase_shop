@@ -18,6 +18,9 @@ class SignUpBinding extends Bindings {
     Get.lazyPut(() => SignUpController());
   }
 }
+
+getx service使用场景
+https://viblo.asia/p/getx-flutter-using-getservice-part-5-Ljy5Vjjk5ra
 ```
 
 
