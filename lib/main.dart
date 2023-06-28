@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:litecase_shop/src/localization/message.dart';
 import 'package:litecase_shop/src/routes/app_pages.dart';
+import 'package:litecase_shop/src/themes/app_theme.dart';
 
 Future<void> main() async {
   // await initServices();
@@ -12,8 +13,6 @@ Future<void> main() async {
 void initServices() async {
   // Get.putAsync(() => )
 }
-
-// class
 
 class LisecaseShopApp extends StatelessWidget {
   const LisecaseShopApp({super.key});
@@ -30,11 +29,9 @@ class LisecaseShopApp extends StatelessWidget {
       // locale: ui.window.locale, // 如何读取系统语言 即将弃用
       locale: Get.locale,
       fallbackLocale: const Locale('en', 'US'), // 添加一个回调语言选项，以备上面指定的语言翻译不存在
-      themeMode: ThemeMode.dark,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
+      themeMode: ThemeMode.system, // 默认跟随系统
+      theme: AppTheme.lightTheme, // 浅色主题
+      darkTheme: AppTheme.darkTheme, // 暗色主题
       // home: MyApp(),
       initialRoute: '/signUp',
       getPages: AppPages.routes,
