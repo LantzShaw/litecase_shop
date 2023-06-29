@@ -9,6 +9,9 @@ import 'package:get/get.dart';
 
 class MainController extends GetxController {
   RxInt currentIndex = 0.obs;
+  RxList screens = [].obs;
+
+  // var currentScreen =
 
   void changeIndex(int newIndex) {
     currentIndex.value = newIndex;

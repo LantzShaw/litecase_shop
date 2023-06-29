@@ -18,11 +18,15 @@ class MainScreen extends GetView<MainController> {
     // NOTE: 只有使用GetView才可以这么用
     // Get.put(MainController());
 
+    final List<Widget> _screens = [];
+
     return Scaffold(
       appBar: AppBar(
         title: Text('首页'),
       ),
+      body: _screens[controller.currentIndex.value],
       bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
         onTap: controller.changeIndex,
         currentIndex: controller.currentIndex.value,
         items: const [
