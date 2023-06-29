@@ -51,6 +51,13 @@ https://viblo.asia/p/getx-flutter-using-getservice-part-5-Ljy5Vjjk5ra
 |       |   |-- app_sizes.dart
 |       |   `-- app_texts.dart
 |       |-- features
+|       |-- |-- base/common
+|       |   |   |-- screens
+|       |   |   |   |-- splash
+|       |   |   |   |   `-- splash_screen.dart 闪屏页 路由为 '/splash'
+|       |   |   |   |-- main
+|       |   |   |   |   `-- main_screen.dart 含底部导航栏 路由为 '/'
+|       |   |   |-- widgets
 |       |   |-- address
 |       |   |   |-- bindings
 |       |   |   |-- controllers
