@@ -7,7 +7,15 @@ import 'package:get/get.dart';
  * @Description: TODO
  */
 class ProfileController extends GetxController {
+  // 它的状态管理可以分为这几种： GetBuilder、GetX、Obx、MixinBuilder
+  //
+  // 以及它们通用的Controller：GetXController
+
   RxList contentList = [].obs;
+
+  Rx<String> a = ''.obs;
+
+  // NOTE: RxInt, Rx<String>,RxList,RxList等声明的变量需要加.obs 否则会报错
 
   @override
   void onInit() {
@@ -30,6 +38,6 @@ class ProfileController extends GetxController {
   void increase(String content) {
     contentList.add(content);
 
-    update();
+    // NOTE: update(); 普通变量(例如: String name = '' 没有.obs) -> 需要手动触发update()，与provider差不多
   }
 }
