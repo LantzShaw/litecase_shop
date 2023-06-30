@@ -23,7 +23,8 @@ GetX的状态管理可以分为这几种： GetBuilder、GetX、Obx、MixinBuild
 
 以及它们通用的Controller：GetXController
 
-Get.offAndToNamed('/second')
+Get.offAllNamed('/second');
+Get.offAndToNamed('/second');
 
 getx service使用场景
 https://viblo.asia/p/getx-flutter-using-getservice-part-5-Ljy5Vjjk5ra
