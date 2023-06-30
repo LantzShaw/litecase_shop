@@ -4,7 +4,7 @@ Litecase shop application with flutter.
 
 ## Record
 
-**Getx常用**
+**GetX常用**
 ```text
 SignInController signInController = Get.put<SignInController>(SignInController());
 SignInController signInController = Get.find(); // NOTE: 只有先put才可以find, 否则会报错
@@ -19,8 +19,62 @@ class SignUpBinding extends Bindings {
   }
 }
 
+GetX的状态管理可以分为这几种： GetBuilder、GetX、Obx、MixinBuilder
+
+以及它们通用的Controller：GetXController
+
+Get.offAndToNamed('/second')
+
 getx service使用场景
 https://viblo.asia/p/getx-flutter-using-getservice-part-5-Ljy5Vjjk5ra
+
+class ThemeController extends GetxController {
+  final _box = GetStorage();
+  final _key = 'isDarkMode';
+
+  ThemeMode get theme => _loadTheme() ? ThemeMode.dark : ThemeMode.light;
+  bool _loadTheme() => _box.read(_key) ?? false;
+
+  void saveTheme(bool isDarkMode) => _box.write(_key, isDarkMode);
+  void changeTheme(ThemeData theme) => Get.changeTheme(theme);
+  void changeThemeMode(ThemeMode themeMode) => Get.changeThemeMode(themeMode);
+}
+
+class MyApp extends StatelessWidget {
+  MyApp({Key? key}) : super(key: key);
+  final themeController = Get.put(ThemeController());
+
+  @override
+  Widget build(BuildContext context) {
+    return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'GetX Store',
+      initialBinding: StoreBinding(),
+      theme: Themes.lightTheme,
+      darkTheme: Themes.darkTheme,
+      themeMode: themeController.theme,
+}
+}
+
+class Home extends GetView<StoreController> {
+ Home({Key? key}) : super(key: key);
+ final themeController = Get.find<ThemeController>();
+
+ @override
+ Widget build(BuildContext context) {
+   return Scaffold(backgroundColor: AppColors.spaceCadet,
+     appBar: AppBar(title: const Text("GetX Store"),
+       actions: [IconButton(
+           onPressed: () {
+             if (Get.isDarkMode) {
+               themeController.changeTheme(Themes.lightTheme);
+               themeController.saveTheme(false);
+             } else {
+               themeController.changeTheme(Themes.darkTheme);
+               themeController.saveTheme(true); }},
+           icon: Get.isDarkMode
+               ? const Icon(Icons.light_mode_outlined)
+               : const Icon(Icons.dark_mode_outlined),),], ),
 ```
 
 ## Folder Structure 
@@ -37,7 +91,7 @@ https://viblo.asia/p/getx-flutter-using-getservice-part-5-Ljy5Vjjk5ra
 |   |-- fonts
 |   |-- images
 |   |-- icons
-|   |-- svgs
+|   |-- svg
 |   |-- videos
 |   |-- audios
 |   |-- logo
@@ -46,16 +100,16 @@ https://viblo.asia/p/getx-flutter-using-getservice-part-5-Ljy5Vjjk5ra
 |   |-- src
 |       |-- constants
 |       |   |-- app_colors.dart
-|       |   |-- app_images.dart | images_strings.dart
+|       |   |-- app_images.dart | image_strings.dart
 |       |   |-- app_sizes.dart
 |       |   |-- app_texts.dart | text_strings.dart
 |       |-- features
 |       |-- |-- base/common/main
 |       |   |   |-- screens
 |       |   |   |   |-- splash
-|       |   |   |   |   `-- splash_screen.dart 闪屏页 路由为 '/splash'
+|       |   |   |   |   |-- splash_screen.dart 闪屏页 路由为 '/splash'
 |       |   |   |   |-- main
-|       |   |   |   |   `-- main_screen.dart 含底部导航栏 路由为 '/'
+|       |   |   |   |   |-- main_screen.dart 含底部导航栏 路由为 '/'
 |       |   |   |-- widgets
 |       |   |   |-- bindings
 |       |   |   |-- controllers
@@ -121,9 +175,9 @@ https://viblo.asia/p/getx-flutter-using-getservice-part-5-Ljy5Vjjk5ra
 |       |       |-- screens
 |       |       |-- services
 |       |       |-- widgets
-|       |-- localization
-|       |-- network | net
-|       |-- routes
+|       |-- localization | i10n
+|       |-- network | net | networking
+|       |-- routes | routing
 |       |   |-- app_pages.dart
 |       |   |-- app_routes.dart
 |       |-- themes
@@ -164,6 +218,11 @@ https://viblo.asia/p/getx-flutter-using-getservice-part-5-Ljy5Vjjk5ra
 // forget_password
 
 
+home
+    logic.dart
+    state.dart
+    view.dart
+
 是否可以这样拆分
 features
     authentication
@@ -186,11 +245,32 @@ features
             main  '/' 
             splash '/splash'
             guide '/guide'
+            
+
+参考文章: https://github.com/akaanuzman/shopping_app/tree/master/lib/core
+core
+    base
+        view
+            base_view.dart
+        viewModel
+            base_view_model.dart
+    
+features
+    home
+        model - 模型
+            home_model.dart
+        service - 定义一些api
+            product_service.dart
+        view - 视图
+            home_view.dart
+        viewModel - 调用service、视图 逻辑
+            home_view_model.dart
 ```
 
 **With Bloc**
 ```text
 参考文章: https://a-ghamdii.medium.com/architect-your-flutter-app-the-clean-way-with-bloc-703e6a8c2d23
+https://duskosavic.com/blog/flutter/how-to-structure-flutter-app-when-using-bloc-pattern/
 
 features
     home
