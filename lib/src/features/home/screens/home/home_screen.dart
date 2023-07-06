@@ -9,6 +9,7 @@ class HomeScreen extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
         title: const Text(
@@ -19,8 +20,8 @@ class HomeScreen extends GetView<HomeController> {
         ),
         centerTitle: true,
         elevation: 0.0,
-        systemOverlayStyle: SystemUiOverlayStyle(
-          statusBarColor: Colors.white,
+        systemOverlayStyle: const SystemUiOverlayStyle(
+          statusBarColor: Colors.black,
         ),
       ),
       body: Padding(
@@ -43,6 +44,70 @@ class HomeScreen extends GetView<HomeController> {
                 ),
               ),
             ),
+            Container(
+              constraints: BoxConstraints(
+                maxHeight: 160,
+                maxWidth: 300.0,
+              ),
+              // height: 300.0,
+              child: ListView(
+                scrollDirection: Axis.horizontal,
+                physics: BouncingScrollPhysics(),
+                children: [
+                  Container(
+                    color: Colors.green,
+                    height: 40.0,
+                    width: 200.0,
+                    child: const Text('hello'),
+                  ),
+                  Container(
+                    color: Colors.blue,
+                    height: 40.0,
+                    width: 100.0,
+                    child: const Text('hello'),
+                  ),
+                  Container(
+                    color: Colors.green,
+                    height: 40.0,
+                    width: 100.0,
+                    child: const Text('hello'),
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              height: 100.0,
+              child: ListView.builder(
+                physics: BouncingScrollPhysics(), // 设置成IOS滑动效果
+                padding: EdgeInsets.all(30.0),
+                itemBuilder: (context, index) {
+                  return Card(
+                    color: Colors.red,
+                    // margin: EdgeInsets.all(0), // 设置card与card之间的间距
+                    child: Padding(
+                      padding: EdgeInsets.all(16.0),
+                      child: Text(
+                        '$index',
+                        style: TextStyle(
+                          fontSize: 22.0,
+                        ),
+                      ),
+                    ),
+                  );
+                },
+                itemCount: 10,
+              ),
+            ),
+            SingleChildScrollView(
+              padding: EdgeInsets.all(16.0),
+              child: Container(
+                child: Column(
+                  children: [
+                    Text('hello'),
+                  ],
+                ),
+              ),
+            )
           ],
         ),
       ),
