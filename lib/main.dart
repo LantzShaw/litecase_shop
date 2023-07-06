@@ -33,7 +33,7 @@ class LisecaseShopApp extends StatelessWidget {
       theme: AppTheme.lightTheme, // 浅色主题
       darkTheme: AppTheme.darkTheme, // 暗色主题
       // home: MyApp(),
-      initialRoute: '/signUp',
+      initialRoute: '/',
       getPages: AppPages.routes,
     );
   }
@@ -70,14 +70,14 @@ class MyApp extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text('首页'),
+        title: const Text('首页'),
       ),
       body: Container(
         child: Column(
           children: [
             ElevatedButton(
               onPressed: _showSnackBar,
-              child: Text('Click Me!'),
+              child: const Text('Click Me!'),
             )
           ],
         ),

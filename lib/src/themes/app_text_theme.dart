@@ -1,12 +1,13 @@
+/// @Author: think
+/// @Email: TODO
+/// @Date: 2023.06.28
+/// @Description: TODO
+
 import 'package:flutter/material.dart';
 
-/**
- * @Author: think
- * @Email: TODO
- * @Date: 2023.06.28
- * @Description: TODO
- */
 class AppTextTheme {
+  AppTextTheme._();
+
   static TextTheme lightTextTheme = const TextTheme(
     displayLarge: TextStyle(
       fontSize: 16.0,

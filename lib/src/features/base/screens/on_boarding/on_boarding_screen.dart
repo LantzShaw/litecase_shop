@@ -1,9 +1,7 @@
-/**
- * @Author: think
- * @Email: TODO
- * @Date: 2023.07.02
- * @Description: TODO
- */
+/// @Author: think
+/// @Email: TODO
+/// @Date: 2023.07.02
+/// @Description: TODO
 
 import 'package:flutter/material.dart';
 import 'package:liquid_swipe/liquid_swipe.dart';
@@ -100,7 +98,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
             child: AnimatedSmoothIndicator(
               activeIndex: controller.currentPage,
               count: pages.length,
-              effect: ExpandingDotsEffect(
+              effect: const ExpandingDotsEffect(
                 dotHeight: 10.0,
                 activeDotColor: Colors.red,
               ),

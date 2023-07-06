@@ -1,60 +1,114 @@
-/**
- * @Author: Lantz
- * @Email: lantzshaw@163.com
- * @Date: 2023.06.09
- * @Description: TODO
- */
-
+import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:litecase_shop/src/features/authentication/controllers/sign_in.dart';
 
-class ProfileScreen extends StatelessWidget {
-  ProfileScreen({Key? key}) : super(key: key);
+//滚动最大距离
+const APPBAR_SCROLL_OFFSET = 100;
 
-  // SignInController signInController =
-  //     Get.put<SignInController>(SignInController());
+class ProfileScreen extends StatefulWidget {
+  const ProfileScreen({Key? key}) : super(key: key);
 
-  // ProfileController profileController =
-  //     Get.put<ProfileController>(ProfileController());
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
 
-  // Get.lazyPut<ProfileController>(() => ProfileController());
+class _ProfileScreenState extends State<ProfileScreen> {
+  final List _imageUrl = [
+    'https://dimg04.c-ctrip.com/images/zg0o180000014yl20DEA4.jpg',
+    'https://dimg04.c-ctrip.com/images/zg0f180000014vrut370F.jpg',
+    'https://dimg04.c-ctrip.com/images/zg0n18000001528jhD6B2.jpg'
+  ];
+  double appBarAlpha = 0;
 
-  // 即使不使用控制器实例也会被创建
-  // tag将用于查找具有标签名称的实例,可以用于创建多个实例的时候进行区分
-  // 控制器在不使用时被处理，permanent如果永久为真，则实例将在整个应用程序中保持活动状态,不会被释放
-  // MyController myController = Get.put(MyController(), permanent: true);
-  // MyController myController = Get.put(MyController(), tag: "instancel", permanent: true);
+  @override
+  void initState() {
+    super.initState();
+  }
 
-  // 实例将在使用时创建(懒加载)
-  // 它类似于'permanent'，区别在于实例在不被使用时被丢弃
-  // 但是当它再次需要使用时，get 将重新创建实例
-  // Get.lazyPut(()=> MyController());
-  // Get.lazyPut(()=> MyController(), tag: "instancel");
+  @override
+  void dispose() {
+    super.dispose();
+  }
 
-  // Get.put 异步版本
-  // Get.putAsync<MyController>(() async  => await MyController());
-
-  // 每次都将返回一个新的实例
-  // Get.create<MyController>(() => MyController());
-
-  SignInController signInController = Get.find();
+  _onScroll(offset) {
+    double alpha = offset / APPBAR_SCROLL_OFFSET;
+    if (alpha < 0) {
+      alpha = 0;
+    } else if (alpha > 1) {
+      alpha = 1;
+    }
+    setState(() {
+      appBarAlpha = alpha;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Obx(() => Text('$signInController.counter.value')),
-        const SizedBox(
-          height: 20.0,
-        ),
-        ElevatedButton(
-          onPressed: () {
-            signInController.increase();
-          },
-          child: const Text('+1'),
-        )
-      ],
+    return Scaffold(
+      body: Stack(
+        children: <Widget>[
+          MediaQuery.removePadding(
+            context: context,
+            removeTop: true,
+            // 监听列表的滚动
+            child: NotificationListener(
+              // 监听滚动后要调用的方法
+              // ignore: missing_return
+              onNotification: (scrollNotification) {
+                // 只有当是更新状态下和是第0个child的时候才会调用
+                if (scrollNotification is ScrollUpdateNotification &&
+                    scrollNotification.depth == 0) {
+                  _onScroll(scrollNotification.metrics.pixels);
+                }
+                return true;
+              },
+              child: ListView(
+                children: <Widget>[
+                  Container(
+                    height: 110,
+                    child: Swiper(
+                      // item的数量
+                      itemCount: _imageUrl.length,
+                      // 自动播放
+                      autoplay: true,
+                      itemBuilder: (BuildContext context, int index) {
+                        return Image.network(
+                          _imageUrl[index],
+                          fit: BoxFit.fill,
+                        );
+                      },
+                      // banner上添加指示器
+                      pagination: SwiperPagination(),
+                    ),
+                  ),
+                  Container(
+                    height: 800,
+                    child: ListTile(
+                      title: Text("哈哈"),
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ),
+          // 通过Opacity的透明度来控制appBar的显示与隐藏
+          // opacity:透明度，0.0 到 1.0，0.0表示完全透明，1.0表示完全不透明
+          Opacity(
+            opacity: appBarAlpha,
+            child: Container(
+              height: 80,
+              decoration: BoxDecoration(
+                color: Colors.white,
+              ),
+              child: Center(
+                child: Padding(
+                  padding: EdgeInsets.only(top: 20),
+                  child: Text("首页"),
+                ),
+              ),
+            ),
+          )
+        ],
+      ),
     );
   }
 }

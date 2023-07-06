@@ -1,9 +1,7 @@
-/**
- * @Author: think
- * @Email: TODO
- * @Date: 2023.06.09
- * @Description: TODO
- */
+/// @Author: think
+/// @Email: TODO
+/// @Date: 2023.06.09
+/// @Description: TODO
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -36,7 +34,7 @@ class SignUpScreen extends GetView<SignUpController> {
 
             Get.updateLocale(local);
           },
-          child: Text('切换语言'),
+          child: const Text('切换语言'),
         ),
         ElevatedButton(
           onPressed: () {

@@ -1,11 +1,10 @@
+/// @Author: think
+/// @Email: TODO
+/// @Date: 2023.06.28
+/// @Description: TODO
+
 import 'package:get/get.dart';
 
-/**
- * @Author: think
- * @Email: TODO
- * @Date: 2023.06.28
- * @Description: TODO
- */
 class ProfileController extends GetxController {
   // 它的状态管理可以分为这几种： GetBuilder、GetX、Obx、MixinBuilder
   //
