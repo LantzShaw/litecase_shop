@@ -4,6 +4,34 @@ Litecase shop application with flutter.
 
 ## Record
 
+**brightness**
+```text
+var mediaQuery = MediaQuery.of(context);
+var height = mediaQuery.size.height;
+var brightness = mediaQuery.platformBrightness;
+bool isDakMode = brightness == Brightness.dark;
+```
+
+**bottom sheet高度自适应与溢出处理**
+
+```text
+参考文章: https://juejin.cn/post/7081475476765556749
+```
+
+**上拉加载与上拉加载**
+```text
+参考文章: https://juejin.cn/post/6992513095956430862
+
+RefreshIndicator(
+    onRefresh: _onRefresh,
+    child: ListView.builder(
+      itemBuilder: _renderRow,
+      itemCount: list.length,
+      controller: _scrollController, 
+    ),
+),
+```
+
 **键盘溢出问题(overflow)**
 ```text
 问题描述
@@ -123,6 +151,99 @@ AppBar 配置为配置 appBar 的样式，相应的，其状态栏的图标就�
 AnnotatedRegion 为直接配置 UI 样式，其状态栏样式与字面意思相同
 ```
 
+**ListView**
+```text
+参考文章：https://blog.csdn.net/u010347226/article/details/108831723
+
+ListView 的类型
+ListView
+ListView.builder
+ListView.separated
+ListView.custom
+
+ListView的默认构造函数，显示的构造 List< Widget>，该方式适合于具有少量子元素的列表视图，因为这种方式需要将所有需要显示的子Widget 都提前构建好，而不是等到子 Widget 真正显示的时候再构建，即通过默认的构造函数构建的 ListView 没有应用基于 Sliver 的懒加载模型。
+ListView.builder 利用 IndexedWidgetBuilder 按需构建子 Widget，适合列表项比较多( 或者无限 )的列表视图，因为构建器只有当子 Widget 真正需要显示的时候才会被构建，即使用 builder 方式构建的 ListView 支持基于 Sliver 的懒加载模型的。
+ListView.separated 利用两个 IndexedWidgetBuilder: itemBuilder 根据需要构建子 Widget 和 separatorBuilder 构建子 Widget 之间的分割符子 Widget。此构造函数适用于具有固定数量的子 Widget 的列表视图。
+ListView.custom 使用 SliverChildDelegate 构建，它提供了定制子模型的其它方面的能力，如 SliverChildDelegate 可以控制用于估算实际上不可见的子 Widget 的大小的算法。
+
+SizedBox(
+  height: 300.0,
+  child: ListView( // 用于数量比较少
+    scrollDirection: Axis.vertical, // 滚动方向
+    physics: BouncingScrollPhysics(), // 设置IOS的滑动动画
+    children: [
+      Container(
+        color: Colors.green,
+        height: 100.0,
+        child: const Text('hello'),
+      ),
+      Container(
+        color: Colors.blue,
+        height: 100.0,
+        child: const Text('hello'),
+      ),
+      Container(
+        color: Colors.green,
+        height: 100.0,
+        child: const Text('hello'),
+      ),
+      Container(
+        color: Colors.blue,
+        height: 100.0,
+        child: const Text('hello'),
+      ),
+      Container(
+        color: Colors.green,
+        height: 100.0,
+        child: const Text('hello'),
+      ),
+    ],
+  ),
+)
+
+Container(
+  height: 100.0,
+  child: ListView.builder( // 用于数量较多
+    physics: BouncingScrollPhysics(), // 设置成IOS滑动效果
+    padding: EdgeInsets.all(30.0),
+    itemBuilder: (context, index) {
+      return Card(
+        margin: EdgeInsets.all(0), // 设置card与card之间的间距
+        child: Padding(
+          padding: EdgeInsets.all(16.0),
+          child: Text(
+            '$index',
+            style: TextStyle(
+              fontSize: 22.0,
+            ),
+          ),
+        ),
+      );
+    },
+    itemCount: 10,
+  ),
+),
+
+ListView.separated(
+  itemBuilder: (context, position) {
+    return ListItem();
+  },
+  separatorBuilder: (context, position) {
+    return SeparatorItem();
+  },
+  itemCount: itemCount,
+),
+
+
+physics属性滑动效果
+AlwaysScrollableScrollPhysics、BouncingScrollPhysics、NeverScrollableScrollPhysics
+
+在你使用这些属性时，需要将itemview充满整个ListView才会出现对应的效果，特别是BouncingScrollPhysics，这是IOS上特有的回弹特性，但是在子view不足以填充满的时候设置这个属性是不会生效的，CustomScrollView这个组件中也会出现类似的问题，在下方列表填充不满时，slivers中的控件的联动特效会出现异常。
+
+如果一定要在子view不够多的情况下实现回弹效果呢？只需要这样设置physics属性：
+ListView.builder(itemBuilder: null,
+      physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics())
+```
 
 **GetX常用**
 ```text
