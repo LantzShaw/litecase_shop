@@ -4,6 +4,126 @@ Litecase shop application with flutter.
 
 ## Record
 
+**键盘溢出问题(overflow)**
+```text
+问题描述
+当布局高度写死时，例如设置为屏幕高度，这时候键盘弹起页面上会出现布局overflow的提示
+软键盘弹起后遮挡输入框
+Stack 布局中跟随键盘抬起
+原因：在flutter中，键盘弹起时系统会缩小Scaffold的高度并重建
+
+1.解决overflow提示问题
+把Scaffold的resizeToAvoidBottomInset属性设置为false，这样在键盘弹出时将不会resize(输入框抵住键盘)
+把写死的高度改为 原高度 - MediaQuery.of(context).viewInsets.bottom，键盘弹出时布局将重建，而这个MediaQuery.of(context).viewInsets.bottom变量在键盘弹出前是0，键盘弹起后的就是键盘的高度
+2.遮挡输入框问题
+将输入框放进可滚动的Widget中(例如SingleChildScrollView)即可，当输入框获取焦点后，系统会自动将它滑动到可视区域.
+
+https://www.jianshu.com/p/742257cd4bad
+```
+
+**ElevatedButton样式设置**
+
+```text
+            
+/// InputBorder.none 无下划线
+/// OutlineInputBorder 上下左右 都有边框
+/// UnderlineInputBorder 只有下边框  默认使用的就是下边框
+// border: UnderlineInputBorder(
+//   borderSide: BorderSide(
+//     width: 1.0,
+//     color: Color(0xFFF2F2F2),
+//   ),
+// ),
+
+
+// 使用ButtonStyle
+// style: ButtonStyle(
+// backgroundColor: MaterialStateProperty.all(Colors.red),
+// padding: MaterialStateProperty.all(EdgeInsets.all(50)),
+// textStyle: MaterialStateProperty.all(TextStyle(fontSize: 30),),),
+
+// style: ElevatedButton.styleFrom(
+// elevation: 0,
+// enableFeedback: false,
+// splashFactory: NoSplash.splashFactory,
+// ),
+```
+
+**TextField**
+
+```text
+TextField(
+/// 键盘类型
+// keyboardType: TextInputType.number,
+/// 遮掩文本
+// obscureText: true,
+// controller: ,
+onChanged: (value) {
+print(value);
+},
+controller: textEditingController,
+cursorColor: Theme.of(context).primaryColor,
+decoration: InputDecoration(
+enabledBorder: const UnderlineInputBorder(
+  borderSide: BorderSide(
+    color: Color(0xFFE5E3E3),
+    width: 1.0,
+  ),
+),
+focusedBorder: UnderlineInputBorder(
+  borderSide: BorderSide(
+    color: Theme.of(context).primaryColor,
+    width: 1.0,
+  ),
+),
+hintText: '请输入手机号',
+hintStyle: const TextStyle(
+  color: Color(0xffcccccc),
+),
+),
+)
+```
+
+**设置状态栏颜色**
+```text
+https://blog.csdn.net/qq_16251833/article/details/116293386
+方式一: 依赖appbar(只有设置了appbar才能设置)
+Scaffold(
+  appBar: AppBar(
+    title: Text("开发者菜单"),
+    titleTextStyle: TextStyle(color: Colors.white),
+            // 配置导航栏图标的显示模式
+    brightness: Brightness.dark,
+  ),
+);
+
+Scaffold(
+appBar: AppBar(
+    backgroundColor: Colors.white,
+    systemOverlayStyle: const SystemUiOverlayStyle(
+      // 设置状态栏的背景颜色
+      statusBarColor: Colors.white,
+      // 状态栏的文字的颜色
+      statusBarIconBrightness: Brightness.dark,
+    ),
+    elevation: 0,
+  ),
+)
+
+
+方式二: 没有appbar可以直接设置状态栏样式
+ AnnotatedRegion(
+  child: Scaffold(),
+  value: SystemUiOverlayStyle.dark,
+);
+
+注意点：
+AppBar 配置为配置 appBar 的样式，相应的，其状态栏的图标就会调整为与 appBar 样式相反的样式
+
+AnnotatedRegion 为直接配置 UI 样式，其状态栏样式与字面意思相同
+```
+
+
 **GetX常用**
 ```text
 SignInController signInController = Get.put<SignInController>(SignInController());
@@ -91,6 +211,7 @@ class Home extends GetView<StoreController> {
 |-- assets
 |   |-- fonts
 |   |-- images
+|   |   |-- splash | splash_images
 |   |-- icons
 |   |-- svg
 |   |-- videos
@@ -109,6 +230,8 @@ class Home extends GetView<StoreController> {
 |       |   |   |-- screens
 |       |   |   |   |-- splash
 |       |   |   |   |   |-- splash_screen.dart 闪屏页 路由为 '/splash'
+|       |   |   |   |-- on_boarding
+|       |   |   |   |   |-- on_boarding_screen.dart  路由为 '/boarding'
 |       |   |   |   |-- main
 |       |   |   |   |   |-- main_screen.dart 含底部导航栏 路由为 '/'
 |       |   |   |-- widgets
@@ -285,10 +408,21 @@ features
     authentication
         bloc
             
-            
+
+shared            
 features
+    common
+        presentation
+            screens
+            blocs
+            widgets
+        data
+        domain  
     auth
         presentation
+            blocs
+            screens
+            widgets
         domain
         data
     home
@@ -313,4 +447,17 @@ features
                 order_remote_data_source.dart
                 order_local_data_source.dart
             
+```
+
+```text
+flutter create --template=package packageName
+
+flutter pub publish --dry-run
+
+flutter pub publish
+```
+
+```text
+FlutterBoost
+新一代Flutter-Native混合解决方案。 FlutterBoost是一个Flutter插件，它可以轻松地为现有原生应用程序提供Flutter混合集成方案
 ```
