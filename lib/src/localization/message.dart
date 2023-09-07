@@ -1,25 +1,18 @@
-/**
- * @Author: think
- * @Email: TODO
- * @Date: 2023.06.28
- * @Description: TODO
- */
+/// @author think
+/// @email TODO
+/// @date 2023.06.28
+/// @description TODO
+/// @license The MIT License
 
 import 'package:get/get.dart';
+import 'package:litecase_shop/src/localization/en_US.dart';
+import 'package:litecase_shop/src/localization/zh_CN.dart';
 
 class Message extends Translations {
   @override
   // TODO: implement keys
   Map<String, Map<String, String>> get keys => {
-        'zh_CN': {
-          'hello': '你好，世界！',
-          'login': '登录',
-          'register': '注册',
-        },
-        'en_US': {
-          'hello': 'hello world',
-          'login': 'login',
-          'register': 'register'
-        },
+        'zh_CN': zh_CN,
+        'en_US': en_US,
       };
 }

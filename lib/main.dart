@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:litecase_shop/src/localization/message.dart';
 import 'package:litecase_shop/src/routes/app_pages.dart';
@@ -6,6 +7,8 @@ import 'package:litecase_shop/src/themes/app_theme.dart';
 
 Future<void> main() async {
   // await initServices();
+
+  WidgetsFlutterBinding.ensureInitialized();
 
   runApp(const LisecaseShopApp());
 }
@@ -35,6 +38,7 @@ class LisecaseShopApp extends StatelessWidget {
       // home: MyApp(),
       initialRoute: '/',
       getPages: AppPages.routes,
+      builder: EasyLoading.init(),
     );
   }
 }

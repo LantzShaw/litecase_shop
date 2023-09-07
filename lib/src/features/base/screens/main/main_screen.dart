@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:litecase_shop/src/features/base/controllers/main.dart';
 import 'package:litecase_shop/src/features/cart/screens/cart/cart_screen.dart';
+import 'package:litecase_shop/src/features/category/screens/category_screen.dart';
 import 'package:litecase_shop/src/features/home/screens/home/home_screen.dart';
 
 class MainScreen extends GetView<MainController> {
@@ -17,7 +18,11 @@ class MainScreen extends GetView<MainController> {
     // NOTE: 只有使用GetView才可以这么用
     // Get.put(MainController());
 
-    final List<Widget> screens = [const HomeScreen(), const CartScreen()];
+    final List<Widget> screens = [
+      HomeScreen(),
+      CategoryScreen(),
+      const CartScreen(),
+    ];
 
     return Obx(
       () => Scaffold(
