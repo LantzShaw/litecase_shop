@@ -1,10 +1,45 @@
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:litecase_shop/src/features/authentication/controllers/profile.dart';
 
-class ProfileScreen extends GetView<ProfileController> {
-  ProfileScreen({Key? key}) : super(key: key);
+// 滚动最大距离
+const APPBAR_SCROLL_OFFSET = 100;
+
+class ProfileScreen extends StatefulWidget {
+  const ProfileScreen({Key? key}) : super(key: key);
+
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+  final List _imageUrl = [
+    'https://dimg04.c-ctrip.com/images/zg0o180000014yl20DEA4.jpg',
+    'https://dimg04.c-ctrip.com/images/zg0f180000014vrut370F.jpg',
+    'https://dimg04.c-ctrip.com/images/zg0n18000001528jhD6B2.jpg'
+  ];
+  double appBarAlpha = 0;
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
+  _onScroll(offset) {
+    double alpha = offset / APPBAR_SCROLL_OFFSET;
+    if (alpha < 0) {
+      alpha = 0;
+    } else if (alpha > 1) {
+      alpha = 1;
+    }
+    setState(() {
+      appBarAlpha = alpha;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +57,7 @@ class ProfileScreen extends GetView<ProfileController> {
                 // 只有当是更新状态下和是第0个child的时候才会调用
                 if (scrollNotification is ScrollUpdateNotification &&
                     scrollNotification.depth == 0) {
-                  controller.onScroll(scrollNotification.metrics.pixels);
+                  _onScroll(scrollNotification.metrics.pixels);
                 }
                 return true;
               },
@@ -32,12 +67,12 @@ class ProfileScreen extends GetView<ProfileController> {
                     height: 110,
                     child: Swiper(
                       // item的数量
-                      itemCount: controller.imageUrl.length,
+                      itemCount: _imageUrl.length,
                       // 自动播放
                       autoplay: true,
                       itemBuilder: (BuildContext context, int index) {
                         return Image.network(
-                          controller.imageUrl[index],
+                          _imageUrl[index],
                           fit: BoxFit.fill,
                         );
                       },
@@ -53,19 +88,19 @@ class ProfileScreen extends GetView<ProfileController> {
                       ),
                       ListTile(
                         leading: Icon(Icons.settings),
-                        title: Text('2'),
+                        title: Text('1'),
                       ),
                       ListTile(
                         leading: Icon(Icons.settings),
-                        title: Text('3'),
+                        title: Text('1'),
                       ),
                       ListTile(
                         leading: Icon(Icons.settings),
-                        title: Text('4'),
+                        title: Text('1'),
                       ),
                       ListTile(
                         leading: Icon(Icons.settings),
-                        title: Text('5'),
+                        title: Text('1'),
                       )
                     ],
                   ),
@@ -79,20 +114,18 @@ class ProfileScreen extends GetView<ProfileController> {
               ),
             ),
           ),
-          Obx(
-            () => AnimatedOpacity(
-              opacity: controller.appBarAlpha.value,
-              duration: Duration(microseconds: 300),
-              child: Container(
-                height: 80.0,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 20.0),
-                  child: Center(
-                    child: Text('首页'),
-                  ),
+          AnimatedOpacity(
+            opacity: appBarAlpha,
+            duration: Duration(microseconds: 300),
+            child: Container(
+              height: 80.0,
+              decoration: BoxDecoration(
+                color: Colors.white,
+              ),
+              child: Padding(
+                padding: const EdgeInsets.only(top: 20.0),
+                child: Center(
+                  child: Text('首页'),
                 ),
               ),
             ),

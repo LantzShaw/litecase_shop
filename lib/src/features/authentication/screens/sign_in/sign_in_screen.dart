@@ -6,7 +6,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:get/get.dart';
 
 class SignInScreen extends StatefulWidget {
   SignInScreen({Key? key}) : super(key: key);
@@ -20,7 +19,6 @@ class _SignInScreenState extends State<SignInScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     textEditingController = TextEditingController();
   }
@@ -44,7 +42,7 @@ class _SignInScreenState extends State<SignInScreen> {
         elevation: 0,
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 16.0),
+        padding: const EdgeInsets.symmetric(horizontal: 36.0, vertical: 16.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -56,9 +54,12 @@ class _SignInScreenState extends State<SignInScreen> {
                   '手机快捷登录',
                   style: TextStyle(
                     color: Colors.black,
-                    fontSize: 24.0,
+                    fontSize: 28.0,
                     fontWeight: FontWeight.bold,
                   ),
+                ),
+                SizedBox(
+                  height: 10.0,
                 ),
                 const Text(
                   '手机验证码直接登录，无需注册',
@@ -76,7 +77,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   decoration: InputDecoration(
                     enabledBorder: const UnderlineInputBorder(
                       borderSide: BorderSide(
-                        color: Color(0xFFE5E3E3),
+                        color: Color(0xF0EDECEC),
                         width: 1.0,
                       ),
                     ),
@@ -93,9 +94,13 @@ class _SignInScreenState extends State<SignInScreen> {
                   ),
                 ),
                 const SizedBox(
-                  height: 10.0,
+                  height: 18.0,
                 ),
                 TextField(
+                  onChanged: (text) {
+                    print(text);
+                  },
+                  controller: textEditingController,
                   cursorColor: Theme.of(context).primaryColor,
                   decoration: InputDecoration(
                     hintText: '请输入验证码',
@@ -105,7 +110,7 @@ class _SignInScreenState extends State<SignInScreen> {
                     enabledBorder: const UnderlineInputBorder(
                       borderSide: BorderSide(
                         width: 1.0,
-                        color: Color(0xFFE5E3E3),
+                        color: Color(0xF0EDECEC),
                       ),
                     ),
                     focusedBorder: UnderlineInputBorder(
@@ -126,11 +131,13 @@ class _SignInScreenState extends State<SignInScreen> {
                         style: ElevatedButton.styleFrom(
                           elevation: 0,
                           enableFeedback: false,
+                          padding: EdgeInsets.symmetric(vertical: 12.0),
+                          backgroundColor: Theme.of(context).primaryColor,
                         ),
                         onPressed: () {
                           print(textEditingController.text);
 
-                          Get.offAndToNamed('/');
+                          // Get.offAndToNamed('/');
                         },
                         child: const Text('登 录'),
                       ),

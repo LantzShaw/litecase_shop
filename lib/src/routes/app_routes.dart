@@ -10,6 +10,8 @@ abstract class Routes {
   Routes._();
 
   static const main = _Paths.main;
+  static const advertisement = _Paths.advertisement;
+  static const notification = _Paths.notification;
   static const home = _Paths.home;
   static const profile = _Paths.profile;
   static const category = _Paths.category;
@@ -24,6 +26,8 @@ abstract class _Paths {
   _Paths._();
 
   static const main = '/';
+  static const advertisement = '/advertisement';
+  static const notification = '/notification';
   static const home = '/home';
   static const profile = '/profile';
   static const category = '/category';

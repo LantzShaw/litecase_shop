@@ -5,6 +5,9 @@
  * @Description: TODO
  */
 import 'package:dio/dio.dart';
+import 'package:litecase_shop/src/network/interceptors/error_interceptors.dart';
+import 'package:litecase_shop/src/network/interceptors/request_interceptors.dart';
+import 'package:litecase_shop/src/network/interceptors/response_interceptors.dart';
 
 class DioClient {
   final dio = Dio();
@@ -35,26 +38,29 @@ class DioClient {
   }
 
   void _addInterceptors() {
-    // dio.interceptors.add();
+    dio.interceptors.add(RequestInterceptors());
+    dio.interceptors.add(ResponseInterceptors());
+    dio.interceptors.add(ErrorInterceptors());
+    dio.interceptors.add(LogInterceptor());
   }
 
-  Future<Response> dioGet(path, params) {
+  Future<Response> dioGet(String path, Map<String, dynamic>? params) {
     return dio.get(path, queryParameters: params);
   }
 
-  Future<Response> dioPost(path, data) {
+  Future<Response> dioPost(String path, Object? data) {
     return dio.post(path, data: data);
   }
 
-  Future<Response> dioPut(path, data) {
+  Future<Response> dioPut(String path, Object? data) {
     return dio.put(path, data: data);
   }
 
-  Future<Response> dioDelete(path, data) {
+  Future<Response> dioDelete(String path, Object? data) {
     return dio.delete(path, data: data);
   }
 
-  Future<Response> dioPatch(path, data) {
+  Future<Response> dioPatch(String path, Object? data) {
     return dio.patch(path, data: data);
   }
 }

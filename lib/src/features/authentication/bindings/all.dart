@@ -12,8 +12,6 @@ import 'package:litecase_shop/src/features/authentication/controllers/sign_up.da
 class AllBinding extends Bindings {
   @override
   void dependencies() {
-    // TODO: implement dependencies
-
     Get.lazyPut(() => SignUpController());
     Get.lazyPut(() => SignInController());
     Get.lazyPut(() => ProfileController());

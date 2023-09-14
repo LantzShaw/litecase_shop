@@ -321,6 +321,8 @@ class Home extends GetView<StoreController> {
 
 ## Folder Structure 
 
+闪屏页 - 广告页（广告） -  新用户引导页（轮播页面，介绍app使用） - 欢迎页（包含登录注册按钮）
+
 **With Getx**
 ```text
 .
@@ -341,7 +343,10 @@ class Home extends GetView<StoreController> {
 |-- lib
 |   |-- main.dart
 |   |-- src
+|       |-- api
+|       |   |-- authentication.dart
 |       |-- constants
+|       |   |-- app_caches.dart
 |       |   |-- app_colors.dart
 |       |   |-- app_images.dart | image_strings.dart
 |       |   |-- app_sizes.dart

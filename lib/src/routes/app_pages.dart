@@ -4,15 +4,21 @@
 /// @Description: TODO
 
 import 'package:get/get.dart';
+import 'package:litecase_shop/src/features/authentication/bindings/profile.dart';
 import 'package:litecase_shop/src/features/authentication/bindings/sign_in.dart';
 import 'package:litecase_shop/src/features/authentication/bindings/sign_up.dart';
+import 'package:litecase_shop/src/features/authentication/screens/profile/profile_screen.dart';
 import 'package:litecase_shop/src/features/authentication/screens/sign_in/sign_in_screen.dart';
 import 'package:litecase_shop/src/features/authentication/screens/sign_up/sign_up_screen.dart';
+import 'package:litecase_shop/src/features/base/bindings/advertisement.dart';
 import 'package:litecase_shop/src/features/base/bindings/main.dart';
+import 'package:litecase_shop/src/features/base/screens/advertisement/advertisement_screen.dart';
 import 'package:litecase_shop/src/features/base/screens/main/main_screen.dart';
 import 'package:litecase_shop/src/features/base/screens/welcome/welcome_screen.dart';
 import 'package:litecase_shop/src/features/home/bindings/home.dart';
 import 'package:litecase_shop/src/features/home/screens/home/home_screen.dart';
+import 'package:litecase_shop/src/features/notification/bindings/notification.dart';
+import 'package:litecase_shop/src/features/notification/screens/notification_screen.dart';
 
 part './app_routes.dart';
 
@@ -20,12 +26,22 @@ abstract class AppPages {
   static final routes = [
     GetPage(
       name: Routes.main,
-      page: () => const MainScreen(),
+      page: () => MainScreen(),
       binding: MainBinding(),
     ),
     GetPage(
+      name: Routes.advertisement,
+      page: () => AdvertisementScreen(),
+      binding: AdvertisementBinding(),
+    ),
+    GetPage(
+      name: Routes.notification,
+      page: () => NotificationScreen(),
+      binding: NotificationBinding(),
+    ),
+    GetPage(
       name: Routes.signUp,
-      page: () => const SignUpScreen(),
+      page: () => SignUpScreen(),
       binding: SignUpBinding(),
     ),
     GetPage(
@@ -40,8 +56,13 @@ abstract class AppPages {
     ),
     GetPage(
       name: Routes.welcome,
-      page: () => const WelcomeScreen(),
+      page: () => WelcomeScreen(),
       // binding: HomeBinding(),
+    ),
+    GetPage(
+      name: Routes.profile,
+      page: () => ProfileScreen(),
+      binding: ProfileBinding(),
     )
   ];
 }
