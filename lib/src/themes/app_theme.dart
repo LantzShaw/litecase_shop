@@ -4,9 +4,9 @@
 /// @Description: TODO
 
 import 'package:flutter/material.dart';
-import 'package:litecase_shop/src/themes/app_elevated_button_theme.dart';
-import 'package:litecase_shop/src/themes/app_outlined_button_theme.dart';
-import 'package:litecase_shop/src/themes/app_text_theme.dart';
+import 'package:litecase_shop/src/themes/widget/app_elevated_button_theme.dart';
+import 'package:litecase_shop/src/themes/widget/app_outlined_button_theme.dart';
+import 'package:litecase_shop/src/themes/widget/app_text_theme.dart';
 
 class AppTheme {
   AppTheme._();
