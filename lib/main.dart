@@ -36,7 +36,7 @@ class LisecaseShopApp extends StatelessWidget {
       theme: AppTheme.lightTheme, // 浅色主题
       darkTheme: AppTheme.darkTheme, // 暗色主题
       // home: MyApp(),
-      initialRoute: '/signIn',
+      initialRoute: '/category',
       getPages: AppPages.routes,
       builder: EasyLoading.init(),
     );
